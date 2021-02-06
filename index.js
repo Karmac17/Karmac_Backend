@@ -9,7 +9,7 @@ app.get('/', (req,res) => {
     res.send('Server is ready');
 });
 
-app.get('/users', (req,res) => {
+app.get('/servicecentres', (req,res) => {
     res.send(data);
 })
 
