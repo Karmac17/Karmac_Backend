@@ -1,7 +1,6 @@
 {
   "name": "karmac_backend",
   "version": "1.0.0",
-  "type":"module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,6 +19,7 @@
   "homepage": "https://github.com/Karmac17/Karmac_Backend#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^3.6.4",
     "nodemon": "^2.0.7"
   }
 }
