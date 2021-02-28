@@ -1,7 +1,7 @@
 {
   "name": "karmac_backend",
   "version": "1.0.0",
-  "type":"module",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
