@@ -30,9 +30,9 @@ router.post(
     }),
   ],
   async (req, res) => {
-    const { username, email, password, phonenumber } = req.body;
+    const { username, email, password, phoneNumber } = req.body;
 
-    if (phonenumber === null) {
+    if (phoneNumber === null) {
       if (username == null || email == null || password == null) {
         console.log("error");
         return res.status(400).json({
@@ -41,8 +41,8 @@ router.post(
       }
     }
 
-    console.log(phonenumber);
-    if (!phonenumber) {
+    console.log(phoneNumber);
+    if (!phoneNumber) {
       console.log("yeahhh");
       console.log(req);
       const errors = validationResult(req);
@@ -101,7 +101,7 @@ router.post(
     } else {
       try {
         let user = await User.findOne({
-          phonenumber,
+          phoneNumber,
         });
         if (user) {
           return res.status(400).json({
@@ -112,7 +112,7 @@ router.post(
 
         // await axios
         //   .get(
-        //     `https://2factor.in/API/V1/74f372bd-8d53-11eb-a9bc-0200cd936042/SMS/+91${phonenumber}/AUTOGEN/Karmac`
+        //     `https://2factor.in/API/V1/74f372bd-8d53-11eb-a9bc-0200cd936042/SMS/+91${phoneNumber}/AUTOGEN/Karmac`
         //   )
         //   .then((res) => {
         //     console.log(JSON.stringify(res.data));
@@ -127,7 +127,7 @@ router.post(
         //   });
 
         user = new User({
-          phonenumber,
+          phoneNumber,
         });
 
         // const salt = await bcrypt.genSalt(10);
@@ -172,8 +172,8 @@ router.post(
       });
     }
 
-    const { email, password, phonenumber } = req.body;
-    if (!phonenumber) {
+    const { email, password, phoneNumber } = req.body;
+    if (!phoneNumber) {
       try {
         let user = await User.findOne({
           email,
@@ -217,7 +217,7 @@ router.post(
     } else {
       try {
         let user = await User.findOne({
-          phonenumber,
+          phoneNumber,
         });
         if (!user)
           return res.status(400).json({
@@ -228,7 +228,7 @@ router.post(
         const otp = "1234";
         // await axios
         //   .get(
-        //     `https://2factor.in/API/V1/74f372bd-8d53-11eb-a9bc-0200cd936042/SMS/+91${phonenumber}/AUTOGEN/Karmac`
+        //     `https://2factor.in/API/V1/74f372bd-8d53-11eb-a9bc-0200cd936042/SMS/+91${phoneNumber}/AUTOGEN/Karmac`
         //   )
         //   .then((res) => {
         //     console.log(JSON.stringify(res.data));
@@ -274,10 +274,10 @@ router.get("/me", auth, async (req, res) => {
 
 router.post("/verify", async (req, res) => {
   console.log(req.body);
-  const { otp, sessionId, phonenumber } = req.body;
+  const { otp, sessionId, phoneNumber } = req.body;
   try {
     let user = await User.findOne({
-      phonenumber,
+      phoneNumber,
     });
     if (!user)
       return res.status(400).json({
