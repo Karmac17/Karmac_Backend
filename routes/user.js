@@ -261,17 +261,6 @@ router.post(
   }
 );
 
-router.get("/me", auth, async (req, res) => {
-  try {
-    // request.user is getting fetched from Middleware after token authentication
-    console.log(req);
-    const user = await User.findById(req.user.id);
-    res.json(user);
-  } catch (e) {
-    res.send({ message: "Error in Fetching user" });
-  }
-});
-
 router.post("/verify", async (req, res) => {
   console.log(req.body);
   const { otp, sessionId, phoneNumber } = req.body;
@@ -343,6 +332,41 @@ router.post("/verify", async (req, res) => {
     res.status(500).json({
       message: "Server Error",
     });
+  }
+});
+
+router.get("/me", auth, async (req, res) => {
+  try {
+    // request.user is getting fetched from Middleware after token authentication
+    console.log(req);
+    const user = await User.findById(req.user.id);
+    res.json(user);
+  } catch (e) {
+    res.send({ message: "Error in Fetching user" });
+  }
+});
+
+router.post("/data/addAddress", auth, async (req, res) => {
+  console.log("yes");
+  try {
+    // request.user is getting fetched from Middleware after token authentication
+    console.log(req);
+    const { address } = req.body;
+    const user = await User.findById(req.user.id);
+    await user.updateOne(
+      { $addToSet: { addresses: address } },
+      async function (err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          const userUpdated = await User.findById(req.user.id);
+          res.json(userUpdated);
+        }
+      }
+    );
+    // res.json(user);
+  } catch (e) {
+    res.send({ message: "Error in Fetching user" });
   }
 });
 

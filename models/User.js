@@ -23,6 +23,9 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  addresses: {
+    Array: String,
+  },
 });
 
 // export model user with UserSchema
